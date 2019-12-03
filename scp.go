@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"path"
+	"path/filepath"
 
 	shellquote "github.com/kballard/go-shellquote"
 
@@ -27,7 +27,7 @@ func CopyPath(filePath, destinationPath string, session *ssh.Session) error {
 	if err != nil {
 		return err
 	}
-	return copy(s.Size(), s.Mode().Perm(), path.Base(filePath), f, destinationPath, session)
+	return copy(s.Size(), s.Mode().Perm(), filepath.Base(filePath), f, destinationPath, session)
 }
 
 func copy(size int64, mode os.FileMode, fileName string, contents io.Reader, destination string, session *ssh.Session) error {
